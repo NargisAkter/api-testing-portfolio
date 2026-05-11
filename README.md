@@ -1,7 +1,7 @@
 # IP Parking API Testing Portfolio
 
 ## Overview
-This repository contains Postman API collections and System Integration Testing (SIT) validation workflows for IP Parking and ParkHelp integrations within the 'ABC' @WorkApp platform.
+This repository contains Postman API collections and System Integration Testing (SIT) validation workflows for IP Parking integrations within the 'ABC' @WorkApp platform.
 
 The testing focused on validating real-time parking occupancy data, API integrations, frontend-to-backend communication, and vendor system connectivity for 'XYZ' parking management workflows.
 
