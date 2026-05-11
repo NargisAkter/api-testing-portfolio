@@ -1,0 +1,1082 @@
+{
+  "info": {
+    "_postman_id": "252a0e58-d35e-4620-b981-3f4a2cb67eb1",
+    "name": "IPParking_SIT_Workflow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5866923"
+  },
+  "item": [
+    {
+      "name": "Garage_Info_&_Available_Spots",
+      "item": [
+        {
+          "name": "Request JWT Token IPParking",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let jsonData = JSON.parse(responseBody);",
+                  "let ipparking_acc_token=jsonData.access_token;",
+                  "pm.globals.set(\"ipparking_token\", ipparking_acc_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "client_id",
+                  "value": "472a7692-170e-4859-95d7-2fdf88c908ae",
+                  "type": "text"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "d8b16dc5-c506-4661-89d5-d5f066d7199c",
+                  "type": "text"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "text"
+                },
+                {
+                  "key": "response_type",
+                  "value": "id_token",
+                  "type": "text"
+                },
+                {
+                  "key": "scope",
+                  "value": "ParkBaseApi",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://ids-api-test.ipp-control.com/connect/token",
+              "protocol": "https",
+              "host": [
+                "ids-api-test",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facilities IPParking",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "let j=jsonData.length;",
+                  "pm.environment.set(\"total_garage_ipparking\",j);",
+                  "for(var i=0;i<jsonData.length;i++)",
+                  "{",
+                  "    var garage=jsonData[i].name;",
+                  "    if(jsonData[i].id=='3')",
+                  "    {",
+                  "    pm.environment.set(\"ip_garage1_name\", garage);",
+                  "    }",
+                  "    if(jsonData[i].id=='4')",
+                  "    {",
+                  "    pm.environment.set(\"ip_garage2_name_\", garage);",
+                  "    }",
+                  "",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ipparking_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities",
+              "protocol": "https",
+              "host": [
+                "API-API-TEST",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1.0",
+                "facilities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facility Capacity Tower garage DEV",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "let j=jsonData.totalCapacity;",
+                  "pm.environment.set(\"total_spots_carpark1\",j);",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ipparking_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/3/capacity",
+              "protocol": "https",
+              "host": [
+                "API-API-TEST",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1.0",
+                "facilities",
+                "3",
+                "capacity"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facility Capacity Tower garage  UAT",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "let j=jsonData.totalCapacity;",
+                  "pm.environment.set(\"total_spots_carpark1\",j);",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ipparking_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api-marriot-international-hq.ipp-control.com/api/v1.0/facilities/3/capacity",
+              "protocol": "https",
+              "host": [
+                "api-marriot-international-hq",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1.0",
+                "facilities",
+                "3",
+                "capacity"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facility Capacity Garage 11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "let j=jsonData.totalCapacity;",
+                  "pm.environment.set(\"total_spots_carpark2\",j);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ipparking_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/4/capacity",
+              "protocol": "https",
+              "host": [
+                "API-API-TEST",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1.0",
+                "facilities",
+                "4",
+                "capacity"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facility Occupation Tower Garage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "let j=jsonData.totalOccupation;",
+                  "pm.environment.set(\"totalOccupiedSpots_carpark1\",j);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ipparking_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/3/occupation",
+              "protocol": "https",
+              "host": [
+                "API-API-TEST",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1.0",
+                "facilities",
+                "3",
+                "occupation"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facility Occupation Garage 11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "let j=jsonData.totalOccupation;",
+                  "pm.environment.set(\"totalOccupiedSpots_carpark2\",j);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ipparking_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/4/occupation",
+              "protocol": "https",
+              "host": [
+                "API-API-TEST",
+                "ipp-control",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1.0",
+                "facilities",
+                "4",
+                "occupation"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "https://api-uat.marriott.thoughtwire.io/kpi-service/graphql",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var garageCapacity1 =",
+                  "    pm.environment.get(\"total_spots_carpark1\");",
+                  "var garageOccupancy1 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark1\");",
+                  "var spotsAvailable_Carpark1= garageCapacity1-garageOccupancy1;",
+                  "var garageCapacity2 =",
+                  "    pm.environment.get(\"total_spots_carpark2\");",
+                  "var garageOccupancy2 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark2\");",
+                  "var spotsAvailable_Carpark2= garageCapacity2-garageOccupancy2;",
+                  "",
+                  "for(var i=0;i<jsonData.data.parking.length;i++)",
+                  "{",
+                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
+                  "   }",
+                  " )}",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
+                  "   }",
+                  " )}",
+                  "}",
+                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
+                  "})",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{marriot_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "{{subscription_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Trace",
+                "value": "True",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXN1cmlvbi50aG91Z2h0d2lyZS5pbyIsImF1ZCI6IkFzdXJpb24ifQ.BRfXX2mv7OBUGeueVZEgtD1O2_kEYXCJh1re6FZpGhI",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "{\n    parking {\n        garageName\n        garageBusiness\n        garageCapacity\n        garageOccupancy\n        garageAvailability\n        floorData {\n            floorBusiness\n            floorCapacity\n            floorOccupancy\n            floorName\n          }\n        description\n        amenities\n        address\n        mappedInId\n    }\n  }",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://api-uat.marriott.thoughtwire.io/kpi-service/graphql",
+              "protocol": "http",
+              "host": [
+                "api-uat",
+                "marriott",
+                "thoughtwire",
+                "io"
+              ],
+              "path": [
+                "kpi-service",
+                "graphql"
+              ],
+              "query": [
+                {
+                  "key": "kpiCard",
+                  "value": "evcharging/shortlist",
+                  "disabled": true
+                },
+                {
+                  "key": "kpiCard",
+                  "value": "parking/rate",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "graphql?query=query($zoneId: String){zoneProperties(zoneId: $zoneId){vendor name value}}&variables={\"zoneId\": (zoneid)}",
+                  "disabled": true
+                },
+                {
+                  "key": "variables",
+                  "value": "{\"zoneId\": \"test\"}",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "https://api-uat.marriott.thoughtwire.io/kpi-service/graphql Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var garageCapacity1 =",
+                  "    pm.environment.get(\"total_spots_carpark1\");",
+                  "var garageOccupancy1 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark1\");",
+                  "var spotsAvailable_Carpark1= garageCapacity1-garageOccupancy1;",
+                  "var garageCapacity2 =",
+                  "    pm.environment.get(\"total_spots_carpark2\");",
+                  "var garageOccupancy2 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark2\");",
+                  "var spotsAvailable_Carpark2= garageCapacity2-garageOccupancy2;",
+                  "",
+                  "for(var i=0;i<jsonData.data.parking.length;i++)",
+                  "{",
+                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
+                  "   }",
+                  " )}",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
+                  "   }",
+                  " )}",
+                  "}",
+                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
+                  "})",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{marriot_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "{{subscription_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Trace",
+                "value": "True",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXN1cmlvbi50aG91Z2h0d2lyZS5pbyIsImF1ZCI6IkFzdXJpb24ifQ.BRfXX2mv7OBUGeueVZEgtD1O2_kEYXCJh1re6FZpGhI",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "{\n    parking {\n        garageName\n        garageBusiness\n        garageCapacity\n        garageOccupancy\n        garageAvailability\n        floorData {\n            floorBusiness\n            floorCapacity\n            floorOccupancy\n            floorName\n          }\n        description\n        amenities\n        address\n        mappedInId\n    }\n  }",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "http://api.dev.marriott.az.twsvc.net/kpi-service/graphql",
+              "protocol": "http",
+              "host": [
+                "api",
+                "dev",
+                "marriott",
+                "az",
+                "twsvc",
+                "net"
+              ],
+              "path": [
+                "kpi-service",
+                "graphql"
+              ],
+              "query": [
+                {
+                  "key": "kpiCard",
+                  "value": "evcharging/shortlist",
+                  "disabled": true
+                },
+                {
+                  "key": "kpiCard",
+                  "value": "parking/rate",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "graphql?query=query($zoneId: String){zoneProperties(zoneId: $zoneId){vendor name value}}&variables={\"zoneId\": (zoneid)}",
+                  "disabled": true
+                },
+                {
+                  "key": "variables",
+                  "value": "{\"zoneId\": \"test\"}",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Garage Info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var garageCapacity1 =",
+                  "    pm.environment.get(\"total_spots_carpark1\");",
+                  "var garageOccupancy1 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark1\");",
+                  "var spotsAvailable_Carpark1= garageCapacity1-garageOccupancy1;",
+                  "var garageCapacity2 =",
+                  "    pm.environment.get(\"total_spots_carpark2\");",
+                  "var garageOccupancy2 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark2\");",
+                  "var spotsAvailable_Carpark2= garageCapacity2-garageOccupancy2;",
+                  "",
+                  "for(var i=0;i<jsonData.data.parking.length;i++)",
+                  "{",
+                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
+                  "   }",
+                  " )}",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
+                  "   }",
+                  " )}",
+                  "}",
+                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
+                  "})",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{marriot_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "{{subscription_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Trace",
+                "value": "True",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXN1cmlvbi50aG91Z2h0d2lyZS5pbyIsImF1ZCI6IkFzdXJpb24ifQ.BRfXX2mv7OBUGeueVZEgtD1O2_kEYXCJh1re6FZpGhI",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "{\n    parking {\n        garageName\n        garageBusiness\n        garageCapacity\n        garageOccupancy\n        garageAvailability\n        floorData {\n    \n            floorCapacity\n            floorOccupancy\n            floorVIPCapacity\n            floorAvailability\n            floorVIPOccupancy\n            floorHandicapCapacity\n            floorHandicapOccupancy\n            floorEVChargingCapacity\n            floorEVChargingOccupancy\n            floorBusiness\n            floorName\n          }\n        description\n        amenities\n        address\n        mappedInId\n        \n    }\n  parkingInfo {\n\t\tdescription\n\t\tlinkedItems {\n\t\t\taction\n\t\t\tdisplayOrder\n\t\t\tsubtitle\n\t\t\ttitle\n\t\t\turl\n\t\t}\n\t}\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "https://api-uat.marriott.thoughtwire.io/kpi-service/graphql",
+              "protocol": "https",
+              "host": [
+                "api-uat",
+                "marriott",
+                "thoughtwire",
+                "io"
+              ],
+              "path": [
+                "kpi-service",
+                "graphql"
+              ],
+              "query": [
+                {
+                  "key": "kpiCard",
+                  "value": "evcharging/shortlist",
+                  "disabled": true
+                },
+                {
+                  "key": "kpiCard",
+                  "value": "parking/rate",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "graphql?query=query($zoneId: String){zoneProperties(zoneId: $zoneId){vendor name value}}&variables={\"zoneId\": (zoneid)}",
+                  "disabled": true
+                },
+                {
+                  "key": "variables",
+                  "value": "{\"zoneId\": \"test\"}",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Garage Info dev",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "/*var jsonData = JSON.parse(responseBody);",
+                  "var garageCapacity1 =",
+                  "    pm.environment.get(\"total_spots_carpark1\");",
+                  "var garageOccupancy1 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark1\");",
+                  "var spotsAvailable_Carpark1= garageCapacity1-garageOccupancy1;",
+                  "var garageCapacity2 =",
+                  "    pm.environment.get(\"total_spots_carpark2\");",
+                  "var garageOccupancy2 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark2\");",
+                  "var spotsAvailable_Carpark2= garageCapacity2-garageOccupancy2;",
+                  "",
+                  "for(var i=0;i<jsonData.data.parking.length;i++)",
+                  "{",
+                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
+                  "   }",
+                  " )}",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
+                  "   }",
+                  " )}",
+                  "}",
+                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
+                  "})",
+                  "*/"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "b962fc354ffc4e95933f575fec986f29",
+                "type": "text"
+              },
+              {
+                "key": "product",
+                "value": "portal",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "{\n    parking {\n        garageName\n        garageBusiness\n        garageCapacity\n        garageOccupancy\n        garageAvailability\n        floorData {\n    \n            floorCapacity\n            floorOccupancy\n            floorVIPCapacity\n            floorAvailability\n            floorVIPOccupancy\n            floorHandicapCapacity\n            floorHandicapOccupancy\n            floorEVChargingCapacity\n            floorEVChargingOccupancy\n            floorBusiness\n            floorName\n          }\n        description\n        amenities\n        address\n        mappedInId\n        \n    }\n  parkingInfo {\n\t\tdescription\n\t\tlinkedItems {\n\t\t\taction\n\t\t\tdisplayOrder\n\t\t\tsubtitle\n\t\t\ttitle\n\t\t\turl\n\t\t}\n\t}\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "https://api.dev.marriott.az.twsvc.net/kpi-service/graphql",
+              "protocol": "https",
+              "host": [
+                "api",
+                "dev",
+                "marriott",
+                "az",
+                "twsvc",
+                "net"
+              ],
+              "path": [
+                "kpi-service",
+                "graphql"
+              ],
+              "query": [
+                {
+                  "key": "kpiCard",
+                  "value": "evcharging/shortlist",
+                  "disabled": true
+                },
+                {
+                  "key": "kpiCard",
+                  "value": "parking/rate",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "graphql?query=query($zoneId: String){zoneProperties(zoneId: $zoneId){vendor name value}}&variables={\"zoneId\": (zoneid)}",
+                  "disabled": true
+                },
+                {
+                  "key": "variables",
+                  "value": "{\"zoneId\": \"test\"}",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Parking Info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "/*var jsonData = JSON.parse(responseBody);",
+                  "var garageCapacity1 =",
+                  "    pm.environment.get(\"total_spots_carpark1\");",
+                  "var garageOccupancy1 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark1\");",
+                  "var spotsAvailable_Carpark1= garageCapacity1-garageOccupancy1;",
+                  "var garageCapacity2 =",
+                  "    pm.environment.get(\"total_spots_carpark2\");",
+                  "var garageOccupancy2 =",
+                  "    pm.environment.get(\"totalOccupiedSpots_carpark2\");",
+                  "var spotsAvailable_Carpark2= garageCapacity2-garageOccupancy2;",
+                  "",
+                  "for(var i=0;i<jsonData.data.parking.length;i++)",
+                  "{",
+                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
+                  "   }",
+                  " )}",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "   {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
+                  "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
+                  "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
+                  "   }",
+                  " )}",
+                  "}",
+                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
+                  "})*/",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{marriot_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "{{subscription_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Trace",
+                "value": "True",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXN1cmlvbi50aG91Z2h0d2lyZS5pbyIsImF1ZCI6IkFzdXJpb24ifQ.BRfXX2mv7OBUGeueVZEgtD1O2_kEYXCJh1re6FZpGhI",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "{\n  parkingInfo {\n\t\tdescription\n\t\tlinkedItems {\n\t\t\taction\n\t\t\tdisplayOrder\n\t\t\tsubtitle\n\t\t\ttitle\n\t\t\turl\n\t\t}\n\t}\n}",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "https://api-uat.marriott.thoughtwire.io/kpi-service/graphql",
+              "protocol": "https",
+              "host": [
+                "api-uat",
+                "marriott",
+                "thoughtwire",
+                "io"
+              ],
+              "path": [
+                "kpi-service",
+                "graphql"
+              ],
+              "query": [
+                {
+                  "key": "kpiCard",
+                  "value": "evcharging/shortlist",
+                  "disabled": true
+                },
+                {
+                  "key": "kpiCard",
+                  "value": "parking/rate",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "graphql?query=query($zoneId: String){zoneProperties(zoneId: $zoneId){vendor name value}}&variables={\"zoneId\": (zoneid)}",
+                  "disabled": true
+                },
+                {
+                  "key": "variables",
+                  "value": "{\"zoneId\": \"test\"}",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vehicle_Add_Update_Delete",
+      "item": [
+        {
+          "name": "Add Vehicle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key",
+                "value": "9743cb973082408fba579abc506a84df",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJNYXJyaW90dCIsImlhdCI6MTUxNjIzOTAyMiwiaXNzIjoiaHR0cHM6Ly9tYXJyaW90dC50aG91Z2h0d2lyZS5pbyJ9.692nIqrqkP5KP8oV4tfPNSRgqc_UvxxS0nUbMdFeW2M",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\" : \"123\",\n  \"subsystemId\" : \"IPParkingAddLicensePlate\",\n  \"eventData\" : {\n    \"clientId\" : \"123\",\n    \"country\" : \"CAN\",\n    \"number\" : \"1111111\",\n    \"endValidity\" : \"2024-01-01\",\n    \"startValidity\" : \"2022-01-01\",\n    \"reference\" : \"abcd\",\n    \"status\" : \"1\"\n  }\n}\n\n{\n\"clientId\":\"string\",\n\"lastName\":\"string\",\n\"userId\":\"string\",\n\"userStatus\":\"string\",\n\"country\":\"string\",\n\"number\":\"string\",\n\"endValidity\":\"string\",\n\"startValidity\":\"string\",\n\"licenseStatus\":\"string\",\n\"oldNumber\":\"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user-service/vehicle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user-service",
+                "vehicle"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
