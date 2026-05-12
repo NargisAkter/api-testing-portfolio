@@ -1,13 +1,9 @@
 ## Screenshots
 
 ### Postman Collection
-![Postman Collection](screenshots/postman-collection.png)
-
 This Postman collection demonstrates the complete parking availability workflow integration. The requests validate the end-to-end process of retrieving authentication tokens from the IPParking vendor system, using those tokens to fetch real-time parking occupancy data, and validating the backend responses utilized by the  application to display available parking spots to users.
 
 ### Parking API Validation
-![Parking API](screenshots/parking-api-validation.png)
-
 This API response demonstrates the real-time parking data retrieved from the IPParking vendor system. The validation ensures that the application is successfully receiving accurate parking capacity and occupancy information from the external vendor integration before processing and displaying available parking spots to end users.
 
 ### GraphQL API Response
