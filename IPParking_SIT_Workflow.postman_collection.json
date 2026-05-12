@@ -58,7 +58,7 @@
               ]
             },
             "url": {
-              "raw": "https://api-test.com/connect/token",
+              "raw": "https://mock-api-test.com/connect/token",
               "protocol": "https",
               "host": [
                 "ids-api-test",
@@ -115,10 +115,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-TEST.com/api/v1.0/facilities",
+              "raw": "https://MOCK-API-TEST.com/api/facilities",
               "protocol": "https",
               "host": [
-                "API-TEST",
+                "MOCK-API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -161,10 +161,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-TEST.com/api/v1.0/facilities/3/capacity",
+              "raw": "https://MOCK-API-TEST.com/api/v1.0/facilities/3/capacity",
               "protocol": "https",
               "host": [
-                "API-TEST",
+                "MOCK-API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -208,10 +208,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-TEST.com/api/v1.0/facilities/4/capacity",
+              "raw": "https://MOCK-API-TEST.com/api/v1.0/facilities/4/capacity",
               "protocol": "https",
               "host": [
-                "API-TEST",
+                "MOCK-API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -255,10 +255,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-TEST.com/api/v1.0/facilities/3/occupation",
+              "raw": "https://MOCK-API-TEST.com/api/v1.0/facilities/3/occupation",
               "protocol": "https",
               "host": [
-                "API-TEST",
+                "MOCK-API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -302,10 +302,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-TEST.com/api/v1.0/facilities/4/occupation",
+              "raw": "https://MOCK-API-TEST.com/api/v1.0/facilities/4/occupation",
               "protocol": "https",
               "host": [
-                "API-TEST",
+                "MOCK-API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -412,7 +412,7 @@
               }
             },
             "url": {
-              "raw": "http://api.dev.abc.az.appsvc.net/kpi-service/graphql",
+              "raw": "http://api.dev.example.az.net/kpi-service/graphql",
               "protocol": "http",
               "host": [
                 "api",
@@ -549,11 +549,11 @@
               }
             },
             "url": {
-              "raw": "http://api-uat.abc.app.io/kpi-service/graphql",
+              "raw": "http://api-uat.example.app.io/kpi-service/graphql",
               "protocol": "http",
               "host": [
                 "api-uat",
-                "abc",
+                "example",
                 "app",
                 "io"
               ],
