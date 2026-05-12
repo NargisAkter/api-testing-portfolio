@@ -58,7 +58,7 @@
               ]
             },
             "url": {
-              "raw": "https://ids-api-test.ipp-control.com/connect/token",
+              "raw": "https://api-test.com/connect/token",
               "protocol": "https",
               "host": [
                 "ids-api-test",
@@ -115,10 +115,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities",
+              "raw": "https://API-TEST.com/api/v1.0/facilities",
               "protocol": "https",
               "host": [
-                "API-API-TEST",
+                "API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -132,7 +132,7 @@
           "response": []
         },
         {
-          "name": "Get Facility Capacity Tower garage",
+          "name": "Get Facility Capacity Garage 1",
           "event": [
             {
               "listen": "test",
@@ -161,10 +161,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/3/capacity",
+              "raw": "https://API-TEST.com/api/v1.0/facilities/3/capacity",
               "protocol": "https",
               "host": [
-                "API-API-TEST",
+                "API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -180,7 +180,7 @@
           "response": []
         },
         {
-          "name": "Get Facility Capacity Garage 11",
+          "name": "Get Facility Capacity Garage 2",
           "event": [
             {
               "listen": "test",
@@ -208,10 +208,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/4/capacity",
+              "raw": "https://API-TEST.com/api/v1.0/facilities/4/capacity",
               "protocol": "https",
               "host": [
-                "API-API-TEST",
+                "API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -227,7 +227,7 @@
           "response": []
         },
         {
-          "name": "Get Facility Occupation Tower Garage",
+          "name": "Get Facility Occupation Garage 1",
           "event": [
             {
               "listen": "test",
@@ -255,10 +255,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/3/occupation",
+              "raw": "https://API-TEST.com/api/v1.0/facilities/3/occupation",
               "protocol": "https",
               "host": [
-                "API-API-TEST",
+                "API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -274,7 +274,7 @@
           "response": []
         },
         {
-          "name": "Get Facility Occupation Garage 11",
+          "name": "Get Facility Occupation Garage 2",
           "event": [
             {
               "listen": "test",
@@ -302,10 +302,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://API-API-TEST.ipp-control.com/api/v1.0/facilities/4/occupation",
+              "raw": "https://API-TEST.com/api/v1.0/facilities/4/occupation",
               "protocol": "https",
               "host": [
-                "API-API-TEST",
+                "API-TEST",
                 "ipp-control",
                 "com"
               ],
@@ -341,24 +341,24 @@
                   "",
                   "for(var i=0;i<jsonData.data.parking.length;i++)",
                   "{",
-                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   if(jsonData.data.parking[i].garageName== \"Garage 2\")",
                   "   {",
-                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and APP_API\", function () {",
                   "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
                   "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
                   "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
                   "   }",
                   " )}",
-                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 2\")",
                   "   {",
-                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and APP_API\", function () {",
                   "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
                   "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
                   "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
                   "   }",
                   " )}",
                   "}",
-                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.test(\"Validating total garage number in IPParking and APP_API\", function () {",
                   "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
                   "})",
                   ""
@@ -373,7 +373,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{marriot_token}}",
+                  "value": "{{abc_token}}",
                   "type": "string"
                 }
               ]
@@ -412,12 +412,12 @@
               }
             },
             "url": {
-              "raw": "http://api.dev.marriott.az.twsvc.net/kpi-service/graphql",
+              "raw": "http://api.dev.abc.az.appsvc.net/kpi-service/graphql",
               "protocol": "http",
               "host": [
                 "api",
                 "dev",
-                "marriott",
+                "abc",
                 "az",
                 "twsvc",
                 "net"
@@ -458,7 +458,7 @@
           "response": []
         },
         {
-          "name": "Garage info & spots availavbility UAT",
+          "name": "Garage info & spots availability UAT",
           "event": [
             {
               "listen": "test",
@@ -478,24 +478,24 @@
                   "",
                   "for(var i=0;i<jsonData.data.parking.length;i++)",
                   "{",
-                  "   if(jsonData.data.parking[i].garageName== \"Tower Garage\")",
+                  "   if(jsonData.data.parking[i].garageName== \"Garage 1\")",
                   "   {",
-                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and TW_API\", function () {",
+                  "       pm.test(\"Validating garage name, capacity,occupancy and spots availabilty for Tower Garage in IPParking and APP_API\", function () {",
                   "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark1\")));",
                   "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark1\")));",
                   "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark1);",
                   "   }",
                   " )}",
-                  "  if(jsonData.data.parking[i].garageName== \"Garage 11\")",
+                  "  if(jsonData.data.parking[i].garageName== \"Garage 2\")",
                   "   {",
-                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and TW_API\", function () {",
+                  "       pm.test(\"Validating garage name,capacity,occupancy and spots availabilty for Garage 11 in IPParking and APP_API\", function () {",
                   "    pm.expect(jsonData.data.parking[i].garageCapacity).to.eql(parseInt(pm.environment.get(\"total_spots_carpark2\")));",
                   "    pm.expect(jsonData.data.parking[i].garageOccupancy).to.eql(parseInt(pm.environment.get(\"totalOccupiedSpots_carpark2\")));",
                   "    pm.expect(parseInt(jsonData.data.parking[i].garageAvailability)).to.eql(spotsAvailable_Carpark2);",
                   "   }",
                   " )}",
                   "}",
-                  "    pm.test(\"Validating total garage number in IPParking and TW_API\", function () {",
+                  "    pm.test(\"Validating total garage number in IPParking and APP_API\", function () {",
                   "    pm.expect(i).to.eql(parseInt(pm.environment.get(\"total_garage_ipparking\")));",
                   "})",
                   ""
@@ -510,7 +510,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{marriot_token}}",
+                  "value": "{{abc_token}}",
                   "type": "string"
                 }
               ]
@@ -549,12 +549,12 @@
               }
             },
             "url": {
-              "raw": "http://api-uat.marriott.thoughtwire.io/kpi-service/graphql",
+              "raw": "http://api-uat.abc.app.io/kpi-service/graphql",
               "protocol": "http",
               "host": [
                 "api-uat",
-                "marriott",
-                "thoughtwire",
+                "abc",
+                "app",
                 "io"
               ],
               "path": [
